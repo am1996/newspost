@@ -1,17 +1,17 @@
 import Editor from '@toast-ui/editor'
-import 'codemirror/lib/codemirror.css';
+import '../css/codemirror.min.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
 //bootstrap
 require("bootstrap");
 
-//turbolinks
-let Turbolinks = require("turbolinks")
-Turbolinks.start()
-
 //Toast Markdown Editor
+const chart = require('@toast-ui/editor-plugin-chart');
+const uml = require('@toast-ui/editor-plugin-uml');
 const editor = new Editor({
   el: document.querySelector('#editor'),
   height: '400px',
   initialEditType: 'markdown',
-  placeholder: 'Write something cool!',
-})
+  plugins:[
+    chart,uml
+  ]
+});

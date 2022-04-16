@@ -6,7 +6,6 @@
         <title>@yield("title")</title>
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
-        <script src="{{ asset('js/turbolinks-animate.js') }}" defer></script>
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/bootstrap-icons.mini.css') }}" rel="stylesheet" >

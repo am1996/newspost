@@ -12,6 +12,9 @@ class MainController extends Controller
     public function index(Request $request) {
         return view('posts.index');
     }
+    public function addPost(Request $request){
+        return view("posts.postsform");
+    }
     public function login(Request $request){
         return view('posts.login');
     }
