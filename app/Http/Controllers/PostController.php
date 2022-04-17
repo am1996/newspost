@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Livewire\Post;
 use App\Models\Posts;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {

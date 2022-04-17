@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function login(Request $request){
-        return view('posts.login');
+        return view('user.login');
     }
     public function loginUser(Request $request){
         $creds = $request->only(["email","password"]);
@@ -35,6 +37,6 @@ class UserController extends Controller
         return redirect("/login");
     }
     public function register(Request $request){
-        return view('posts.register');
+        return view('user.register');
     }
 }
