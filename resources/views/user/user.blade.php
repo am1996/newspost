@@ -2,33 +2,68 @@
 @section("title") User Dashboard @endsection
 @section("body")
 <div class ="container mt-5">
+    <div class="col-md-8 offset-md-2 mb-3">
+    @if($errors->any())
+        {!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
+    @endif
+    @if(session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+    @endif
+    </div>
     <div class="col-md-8 offset-md-2 mb-3 card p-4">
-        <table>
-            <tr><th colspan="3"><h2 class="text-center">User Data</h2></th></tr>
-            <tr>
-                <th>Fulname</th>
-                <td>{{ Auth::user()->name }}</td>
-                <td class="text-center"><a class="btn btn-block">Change Fullname</a></td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ Auth::user()->email }}</td>
-                <td class="text-center"><a class="btn btn-block">Change Email</a></td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>*******************************</td>
-                <td class="text-center"><a class="btn btn-block">Change Password</a></td>
-            </tr>
-            <tr>
-                <th class="py-2">Created At</th>
-                <td>{{ Auth::user()->created_at->format("D M, Y - H:i A") }}</td>
-            </tr>
-            <tr>
-                <th class="py-2">Updated At</th>
-                <td>{{ Auth::user()->updated_at->format("D M, Y - H:i A") }}</td>
-            </tr>
-        </table>
+        <div class="d-flex justify-content-between align-items-center">
+            <div>Fullname: {{ Auth::user()->name }}</div>
+            <div class="btn" data-bs-toggle="collapse" data-bs-target="#collapseFullnameForm">
+                Edit
+            </div>
+        </div>
+        
+        <form method="POST" class="collapse" id="collapseFullnameForm">
+            @csrf
+            <input type="text" name="name" class="form-control mb-2"/>
+            <input type="submit" value="Change Fullname" class="btn col-12 btn-success">
+        </form>
+    </div>
+    <div class="col-md-8 offset-md-2 mb-3 card p-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>Email: {{ Auth::user()->email }}</div>
+            <div class="btn" data-bs-toggle="collapse" data-bs-target="#collapseEmailForm">
+                Edit
+            </div>
+        </div>
+        
+        <form method="POST" class="collapse" id="collapseEmailForm">
+            @csrf
+            <input type="email" name="email" class="form-control mb-2"/>
+            <input type="submit" value="Change E-mail" class="btn col-12 btn-success">
+        </form>
+    </div>
+    <div class="col-md-8 offset-md-2 mb-3 card p-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>Password: ***************************</div>
+            <div class="btn" data-bs-toggle="collapse" data-bs-target="#collapsePasswordForm">
+                Edit
+            </div>
+        </div>
+        
+        <form method="POST" class="collapse" id="collapsePasswordForm">
+            @csrf
+            <input placeholder="Password" type="password" name="password" class="form-control mb-2" required/>
+            <input placeholder="Verify Password" type="password" name="confirm_password" class="form-control mb-2" required/>
+            <input type="submit" value="Change Password" class="btn col-12 btn-success">
+        </form>
+    </div>
+    <div class="col-md-8 offset-md-2 mb-3 card p-4">
+        <div>
+            <span>Updated At: {{ Auth::user()->updated_at->format("D M, Y - H:i A") }}</span>
+        </div>
+    </div>
+    <div class="col-md-8 offset-md-2 mb-3 card p-4">
+        <div>
+            <span>Created At: {{ Auth::user()->updated_at->format("D M, Y - H:i A") }}</span>
+        </div>
     </div>
 </div>
 @endsection

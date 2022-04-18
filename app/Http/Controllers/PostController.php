@@ -16,4 +16,10 @@ class PostController extends Controller
     public function addPostR(Request $request){
         $post = new Posts();
     }
+    public function posts(Request $request){
+        $posts = Posts::all();
+        return view("posts.list",[
+            "posts"=> $posts
+        ]);
+    }
 }

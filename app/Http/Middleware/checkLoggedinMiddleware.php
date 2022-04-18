@@ -12,8 +12,9 @@ class checkLoggedinMiddleware
         "login",
         "register",
     ];
-    private $allowIfLoggedin = [
-        "user"
+    private $authNeeded = [
+        "user",
+        "posts/add"
     ];
     /**
      * Handle an incoming request.
@@ -26,6 +27,8 @@ class checkLoggedinMiddleware
     {
         $url = $request->path();
         if(in_array($url,$this->disallowIfLoggedin) && Auth::check())
+            return abort(403);
+        else if(in_array($url,$this->authNeeded) && !Auth::check())
             return abort(403);
         else return $next($request);
     }

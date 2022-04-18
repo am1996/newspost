@@ -14,8 +14,14 @@ class UserController extends Controller
     }
     public function loginUser(Request $request){
         $creds = $request->only(["email","password"]);
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:8|required_with:confirm_password',
+        ]);
         if(Auth::attempt($creds,true))
             return redirect("/")->with("message","Successfully logged in!");
+        else
+            return redirect("/login")->withErrors(['msg'=>"E-mail and password don't match"]);
     }
     public function registerUser(Request $request){
         $request->validate([
@@ -44,6 +50,28 @@ class UserController extends Controller
     }
     public function edit(Request $request){
         $field = null;
-        return redirect("/dashboard")->with("message","Successfully Changed $field");
+        $user = User::find(Auth::user()->id);
+        if(isset($request->name)){
+            $field="Fullname";
+            $request->validate([
+                "name" => "required|regex:/^[a-z A-Z]+$/u"
+            ]);
+            $user->name = $request->name;
+        }else if(isset($request->email)){
+            $field="E-mail";
+            $request->validate([
+                "email" => 'required|email|unique:users',
+            ]);
+            $user->email = $request->email;
+        }else if(isset($request->password)){
+            $field="Password";
+            $request->validate([
+                'password' => 'required|min:8|required_with:confirm_password|same:confirm_password',
+                'confirm_password' => 'required'
+            ]);
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
+        return redirect("/user")->with("message","Successfully Changed $field");
     }
 }
