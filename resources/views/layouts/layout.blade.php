@@ -29,6 +29,9 @@
                     <ul class="navbar-nav ms-auto">
                         @Auth
                         <li class="nav-item">
+                            <a class="nav-link" href="{{route('user.edit')}}"><i class="bi bi-pencil-fill"></i> Edit</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{route('user.logout')}}"><i class="bi bi-door-closed"></i> Logout</a>
                         </li>
                         @else

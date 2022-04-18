@@ -12,6 +12,9 @@ class checkLoggedinMiddleware
         "login",
         "register",
     ];
+    private $allowIfLoggedin = [
+        "user"
+    ];
     /**
      * Handle an incoming request.
      *
@@ -24,10 +27,6 @@ class checkLoggedinMiddleware
         $url = $request->path();
         if(in_array($url,$this->disallowIfLoggedin) && Auth::check())
             return abort(403);
-        /*
-        else if(!in_array($url,$this->disallowIfLoggedin) && !Auth::check())
-            return redirect()->route("user.login");
-        */
         else return $next($request);
     }
 }

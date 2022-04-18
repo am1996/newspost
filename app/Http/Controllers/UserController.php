@@ -39,4 +39,11 @@ class UserController extends Controller
     public function register(Request $request){
         return view('user.register');
     }
+    public function dashboard(Request $request){
+        return view("user.user");
+    }
+    public function edit(Request $request){
+        $field = null;
+        return redirect("/dashboard")->with("message","Successfully Changed $field");
+    }
 }
