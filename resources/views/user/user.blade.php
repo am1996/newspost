@@ -57,12 +57,12 @@
     </div>
     <div class="col-md-8 offset-md-2 mb-3 card p-4">
         <div>
-            <span>Updated At: {{ Auth::user()->updated_at->format("D M, Y - H:i A") }}</span>
+            <span>Updated At: {{ Auth::user()->updated_at->format("d M, Y - H:i A") }}</span>
         </div>
     </div>
     <div class="col-md-8 offset-md-2 mb-3 card p-4">
         <div>
-            <span>Created At: {{ Auth::user()->updated_at->format("D M, Y - H:i A") }}</span>
+            <span>Created At: {{ Auth::user()->updated_at->format("d M, Y - H:i A") }}</span>
         </div>
     </div>
 </div>

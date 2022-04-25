@@ -6,14 +6,15 @@
 <div class="container bg-transparent p-4 mt-5">
     <h1 class="text-center m-2">Add Post</h1>
     <form method="post">
+        @csrf
         <div>
             <label for="editor" class="text-gray-600 font-semibold">Title</label>
-            <input name="title" type="text" name="title" class="form-control">
+            <input name="title" type="text" name="title" class="form-control" style="background-color:#fff;">
         </div>
         <input type="hidden" name="content" id="content">
         <div>
             <label for="editor">Content</label>
-            <textarea id="editor"></textarea>
+            <textarea id="editor" name="content"></textarea>
         </div>
         <div>
             <button type="submit" class="btn btn-outline-success form-control">Add Post</button>

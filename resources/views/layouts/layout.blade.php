@@ -21,7 +21,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{route('posts.index')}}">
+                            <a class="nav-link" aria-current="page" href="{{route('posts.index')}}">
                                 <i class="bi bi-house-fill"></i> Home
                             </a>
                         </li>
@@ -29,7 +29,12 @@
                     <ul class="navbar-nav ms-auto">
                         @Auth
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('user.edit')}}"><i class="bi bi-pencil-fill"></i> Edit</a>
+                            <a class="nav-link" data-turbolinks="false" href="{{route('posts.add')}}">
+                                <i class="bi bi-plus-circle"></i> Add Post
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('user.edit')}}"><i class="bi bi-pencil-fill"></i> Edit User</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('user.logout')}}"><i class="bi bi-door-closed"></i> Logout</a>
