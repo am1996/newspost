@@ -10,6 +10,9 @@ Route::get("/posts",        [PostController::class,"posts"])->name("posts.index"
 Route::get("/posts/add",    [PostController::class,  "add"])->name("posts.add");
 Route::post("/posts/add",   [PostController::class,"add"]);
 Route::get("/posts/{id}",   [PostController::class,"view"])->name("posts.view");
+Route::get("/posts/{id}/edit",    [PostController::class, "edit"])->name("posts.edit");
+Route::post("/posts/{id}/edit",    [PostController::class, "edit"]);
+Route::post("/posts/{id}/delete",    [PostController::class, "delete"]);
 
 // Users
 Route::get('/login',        [UserController::class,"login"])->name("user.login");
