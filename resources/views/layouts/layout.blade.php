@@ -11,6 +11,14 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/bootstrap-icons.mini.css') }}" rel="stylesheet" >
         @livewireStyles
+    <script>
+        $(document).on('turbolinks:load', function () {
+            $("img").lazyload();
+        });
+        $('document').ready(function(){
+            $("img").lazyload();
+        });
+    </script>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-light bg-light">
