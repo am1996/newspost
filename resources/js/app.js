@@ -1,4 +1,5 @@
 //bootstrap
+global.$ = global.jQuery = require('jquery');
 require("bootstrap");
 
 // Turbolinks

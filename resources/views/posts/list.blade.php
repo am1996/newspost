@@ -13,7 +13,7 @@
             <div class="card my-4">  
                 <div class="card-body">
                     <h3 class="card-title">{{$post->title}}</h3>
-                    <p>{!! Str::limit(Illuminate\Mail\Markdown::parse($post->content), 250, '...') !!}</p>
+                    <p>{!! Str::limit(Illuminate\Mail\Markdown::parse($post->content), 50, '...') !!}</p>
                     <div>
                         <div style="float:right;">
                             <a href="/posts/{{$post->id}}" class="btn btn-outline-primary">Read More</a>

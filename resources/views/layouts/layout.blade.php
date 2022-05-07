@@ -6,19 +6,17 @@
         <meta http-equiv="Cache-control" content="public">
         <title>@yield("title")</title>
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/app.js') }}"></script>
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/bootstrap-icons.mini.css') }}" rel="stylesheet" >
+        <script src="{{ asset('js/jquery.lazyload.min.js') }}"></script>
         @livewireStyles
-    <script>
-        $(document).on('turbolinks:load', function () {
+        <script>
+        jQuery(function($) {
             $("img").lazyload();
         });
-        $('document').ready(function(){
-            $("img").lazyload();
-        });
-    </script>
+        </script>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-light bg-light">
