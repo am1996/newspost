@@ -6,10 +6,10 @@ use Illuminate\Support\Facades\Route;
 
 //Index
 Route::get('/',             [PostController::class,"index"])->name("index");
-Route::get('/login',        [UserController::class,"login"])->name("user.login");
-Route::post('/login',       [UserController::class,"loginUser"])->name("user.loginPost");
-Route::get('/logout',       [UserController::class,"logout"])->name("user.logout");
-Route::get('/register',     [UserController::class,"register"])->name("user.register");
+Route::get('/login',        [UserController::class,"login"])->name("index.login");
+Route::post('/login',       [UserController::class,"loginUser"]);
+Route::get('/logout',       [UserController::class,"logout"])->name("index.logout");
+Route::get('/register',     [UserController::class,"register"])->name("index.register");
 Route::post('/register',    [UserController::class,"registerUser"]);
 
 // Posts

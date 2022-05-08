@@ -13,9 +13,9 @@
         <script src="{{ asset('js/jquery.lazyload.min.js') }}"></script>
         @livewireStyles
         <script>
-        jQuery(function($) {
-            $("img").lazyload();
-        });
+            jQuery(function($) {
+                $("img").lazyload();
+            });
         </script>
     </head>
     <body>
@@ -44,14 +44,14 @@
                             <a class="nav-link" href="{{route('user.edit')}}"><i class="bi bi-pencil-fill"></i> Edit User</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('user.logout')}}"><i class="bi bi-door-closed"></i> Logout</a>
+                            <a class="nav-link" href="{{route('index.logout')}}"><i class="bi bi-door-closed"></i> Logout</a>
                         </li>
                         @else
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('user.login')}}"><i class="bi bi-door-open-fill"></i> Login</a>
+                            <a class="nav-link" href="{{route('index.login')}}"><i class="bi bi-door-open-fill"></i> Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('user.register')}}"><i class="bi bi-book-half"></i> Register</a>
+                            <a class="nav-link" href="{{route('index.register')}}"><i class="bi bi-book-half"></i> Register</a>
                         </li>
                         @endif
                     </ul>

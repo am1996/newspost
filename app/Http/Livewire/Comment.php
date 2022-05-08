@@ -3,10 +3,12 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Session\SessionManager;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Comment extends Component
 {
+    protected $listeners = ['refreshComments'=>'$refresh'];
     public $commentData="";
     public $post_id;
     public $comments=[];
@@ -15,19 +17,34 @@ class Comment extends Component
         $this->comments = \App\Models\Comments::where("post_id",$this->post_id)->with("author")->get();
     }
     public function add(){
-        $this->validate([
-            "commentData" => "required"
-        ]);
-        $comment = new \App\Models\Comments();
-        $comment->user_id = auth()->user()->id;
-        $comment->post_id = $this->post_id;
-        $comment->content = $this->commentData;
-        $comment->save();
-        $this->commentData = "";
-        session()->flash('message', 'Comment successfully created or updated.');
+        if(Auth::check()){
+            $this->validate([
+                "commentData" => "required"
+            ]);
+            $comment = new \App\Models\Comments();
+            $comment->user_id = auth()->user()->id;
+            $comment->post_id = $this->post_id;
+            $comment->content = $this->commentData;
+            $comment->save();
+            $this->commentData = "";
+            $this->comments = \App\Models\Comments::where("post_id",$this->post_id)->with("author")->get();
+            $this->emit("refreshComments");
+        }else{
+            $this->errors()->add('Error', 'You need to be logged in!');
+        }
     }
-    public function hydrateCommentData($v){
-        $this->comments = $this->comments = \App\Models\Comments::where("post_id",$this->post_id)->with("author")->orderBy("updated_at","desc")->get();
+    public function delete($id){
+        $comment = \App\Models\Comments::where("id",$id);
+        if($comment->author->id == auth()->user()->id){
+            $comment->delete();
+            $this->comments = \App\Models\Comments::where("post_id",$this->post_id)->with("author")->get();
+            $this->emit("refreshComments");
+        }else{
+            $this->errors()->add('Error', 'Forrbidden Action!');
+        }
+    }
+    public function edit($id){
+        
     }
     public function render()
     {

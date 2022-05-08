@@ -12,7 +12,12 @@
             <div class="card-body">
                 <h3 class="card-title">{{$post->title}}</h3>
                 <p>{!! Illuminate\Mail\Markdown::parse(htmlentities($post->content)) !!}</p>
-                <div style="clear:both; padding-top:5px;">
+                <footer class="blockquote-footer m-0">{{$post->author->name}} 
+                    <cite title="Source Title">
+                        {{$post->updated_at->format("d M Y h:i A") }}
+                    </cite>
+                </footer>
+                <div style="clear:both;">
                     <div style="float:right;">
                         @if( @Auth::user()->id === $post->user_id )
                         <a href="/posts/{{$post->id}}/edit" data-turbolinks="false" class="btn btn-outline-warning">Edit Post</a>

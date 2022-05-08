@@ -21,7 +21,7 @@ class UserController extends Controller
         if(Auth::attempt($creds,true))
             return redirect("/")->with("message","Successfully logged in!");
         else
-            return redirect("/login")->withErrors(['msg'=>"E-mail and password don't match"]);
+            return redirect()->route("index.login")->withErrors(['msg'=>"E-mail and password don't match"]);
     }
     public function registerUser(Request $request){
         $request->validate([
@@ -36,11 +36,11 @@ class UserController extends Controller
         $user->email = $creds["email"];
         $user->name = $creds["name"];
         $user->save();
-        return redirect("/login")->with('message',"Successfully registered Please login!");
+        return redirect()->route("index.login")->with('message',"Successfully registered Please login!");
     }
     public function logout(Request $request){
         Auth::logout();
-        return redirect("/login");
+        return redirect()->route("index.login");
     }
     public function register(Request $request){
         return view('user.register');

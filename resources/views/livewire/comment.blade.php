@@ -1,35 +1,10 @@
 <div>
     {!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
-    @if(session()->has('message'))
-        <br>
-        <div class="alert alert-success">
-            {{ session()->get('message') }}
-        </div>
-    @endif
-    <div wire:poll.1s>
-    @foreach($comments as $comment)
-        <div class="card my-2">  
-            <div class="card-body">
-                <h3>{{$comment->author->name}}</h3>
-                <p>{{$comment->content}}</p>
-                @if( @Auth::user()->id === $comment->user_id )
-                <div style="text-align:right;">
-                    <a href="/comments/{{$comment->id}}/edit" data-turbolinks="false" class="btn btn-outline-warning">Edit</a>
-                    <form method="POST" id="deletePost" onsubmit="conformBeforeSubmit(event)" style="display:inline-block;" action="/comments/{{$comment->id}}/delete">
-                        @csrf 
-                        <button type="submit" class="btn btn-outline-danger">Delete</button>
-                    </form>
-                </div>
-                @endif
-            </div>
-        </div>
-    @endforeach
-    </div>
-    
+
     @Auth
     <div class="card my-2">  
         <div class="card-body">
-            <form class="mb-3" onsubmit="return false">
+            <form class="mb-3" onsubmit="return false;">
                 <label for="comment" class="form-label">
                     <b>Comment</b>
                 </label>
@@ -41,4 +16,25 @@
         </div>
     </div>
     @endAuth
+
+    <div>
+    @foreach($comments as $comment)
+        <div class="card my-2" key="{{$comment->id}}">  
+            <div class="card-body">
+                <h3>{{$comment->author->name}}</h3>
+                <p>{{$comment->content}}</p>
+                <footer class="blockquote-footer m-0">{{ $comment->updated_at->format("d M Y h:i A") }}</footer>
+                @if( @Auth::user()->id === $comment->user_id )
+                <div style="text-align:right;">
+                    <a href="/comments/{{$comment->id}}/edit" data-turbolinks="false" class="btn btn-outline-warning">Edit</a>
+                    <form wire:submit="delete({{$comment->id}})" method="POST" id="deletePost" onsubmit="return false;" style="display:inline-block;">
+                        @csrf 
+                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                    </form>
+                </div>
+                @endif
+            </div>
+        </div>
+    @endforeach
+    </div>
 </div>
