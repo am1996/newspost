@@ -10,6 +10,7 @@ class Comment extends Component
 {
     protected $listeners = ['refreshComments'=>'$refresh'];
     public $commentData="";
+    public $commentEditData="";
     public $post_id;
     public $comments=[];
     public function mount(SessionManager $sm,$post_id){
@@ -30,24 +31,30 @@ class Comment extends Component
             $this->comments = \App\Models\Comments::where("post_id",$this->post_id)->with("author")->get();
             $this->emit("refreshComments");
         }else{
-            $this->errors()->add('Error', 'You need to be logged in!');
+            $this->errors()->add('message', 'You need to be logged in!');
         }
     }
     public function delete($id){
-        $comment = \App\Models\Comments::where("id",$id);
-        if($comment->author->id == auth()->user()->id){
+        $comment = \App\Models\Comments::where("id",$id)->get()[0];
+        if($comment->user_id === auth()->user()->id){
             $comment->delete();
             $this->comments = \App\Models\Comments::where("post_id",$this->post_id)->with("author")->get();
             $this->emit("refreshComments");
         }else{
-            $this->errors()->add('Error', 'Forrbidden Action!');
+            $this->errors()->add('message', 'Forrbidden Action!');
         }
     }
     public function edit($id){
+        $comment = \App\Models\Comments::where("id",$id)->get()[0];
+        if($comment->user_id === auth()->user()->id){
+            $comment->update(["content"=> $this->commentEditData]);
+            $this->emit("refreshComments");
+        }else{
+            $this->errors()->add("message","Forrbidden Action!");
+        }
         
     }
-    public function render()
-    {
+    public function render(){
         return view('livewire.comment',[
             "post_id"=>$this->post_id
         ]);

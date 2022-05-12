@@ -26,12 +26,21 @@
                 <footer class="blockquote-footer m-0">{{ $comment->updated_at->format("d M Y h:i A") }}</footer>
                 @if( @Auth::user()->id === $comment->user_id )
                 <div style="text-align:right;">
-                    <a href="/comments/{{$comment->id}}/edit" data-turbolinks="false" class="btn btn-outline-warning">Edit</a>
+                    <div class="btn btn-outline-warning" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#collapseEdit">Edit</div>
                     <form wire:submit="delete({{$comment->id}})" method="POST" id="deletePost" onsubmit="return false;" style="display:inline-block;">
                         @csrf 
                         <button type="submit" class="btn btn-outline-danger">Delete</button>
                     </form>
                 </div>
+                <div class="p-2"></div>
+                <form wire:submit="edit({{$comment->id}})" class="collapse" id="collapseEdit" onsubmit="return false;">
+                    <textarea rows="3" wire:model.lazy="commentEditData" placeholder="Comment..." type="text" name="comment" class="form-control mb-2">
+                        {{$comment->content}}
+                    </textarea>
+                    <input type="submit" value="Commit Change" class="btn btn-success">
+                </form>
                 @endif
             </div>
         </div>
