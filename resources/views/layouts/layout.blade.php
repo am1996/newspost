@@ -36,7 +36,7 @@
                     <ul class="navbar-nav ms-auto">
                         @Auth
                         <li class="nav-item">
-                            <a class="nav-link" data-turbolinks="false" href="{{route('posts.add')}}">
+                            <a class="nav-link" target="_blank" href="{{route('posts.add')}}">
                                 <i class="bi bi-plus-circle"></i> Add Post
                             </a>
                         </li>

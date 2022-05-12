@@ -28,14 +28,14 @@
                 <div style="text-align:right;">
                     <div class="btn btn-outline-warning" 
                     data-bs-toggle="collapse" 
-                    data-bs-target="#collapseEdit">Edit</div>
+                    data-bs-target="#collapseEdit-{{$comment->id}}">Edit</div>
                     <form wire:submit="delete({{$comment->id}})" method="POST" id="deletePost" onsubmit="return false;" style="display:inline-block;">
                         @csrf 
                         <button type="submit" class="btn btn-outline-danger">Delete</button>
                     </form>
                 </div>
                 <div class="p-2"></div>
-                <form wire:submit="edit({{$comment->id}})" class="collapse" id="collapseEdit" onsubmit="return false;">
+                <form wire:submit="edit({{$comment->id}})" class="collapse" id="collapseEdit-{{$comment->id}}" onsubmit="return false;">
                     <textarea rows="3" wire:model.lazy="commentEditData" placeholder="Comment..." type="text" name="comment" class="form-control mb-2">
                         {{$comment->content}}
                     </textarea>
