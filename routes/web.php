@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -27,4 +28,9 @@ Route::group(["prefix"=>"posts"],function(){
 Route::group(["prefix"=>"user"],function(){
     Route::get('/', [UserController::class,"dashboard"])->name("user.edit");
     Route::post('/',[UserController::class,"edit"])->name("user.editPost");
+});
+
+//Admin
+Route::group(["prefix"=>"admin"],function(){
+    Route::get("/",[AdminController::class,"index"])->name("admin.index");
 });
